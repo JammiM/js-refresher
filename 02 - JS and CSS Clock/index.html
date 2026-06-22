@@ -60,9 +60,69 @@
         background: black;
         position: absolute;
         top: 50%;
+
+        transform-origin: 100%;
+        transform: rotate(90deg);
+        transition: all 0.05s;
+      }
+
+      .second-hand {
+        background: red;
+      }
+
+      .hour-hand {
+        width: 35%;
+        right: 50%;
+        background: black;
       }
     </style>
 
-    <script></script>
+    <script>
+      const secondHand = document.querySelector(".second-hand");
+      const minHand = document.querySelector(".min-hand");
+      const hourHand = document.querySelector(".hour-hand");
+
+      function getDate() {
+        const now = new Date();
+
+        const seconds = now.getSeconds();
+        console.log(seconds);
+
+        // prettier-ignore
+        const secondsDegrees = ((seconds / 60) * 360) + 90;
+
+        secondHand.style.transition =
+          seconds === 0
+            ? "none"
+            : "transform 0.05s cubic-bezier(0.1, 2.7, 0.58, 1)";
+
+        secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+
+        const minutes = now.getMinutes();
+        // console.log(minutes);
+
+        // prettier-ignore
+        const miuntesToDegrees = ((minutes / 60) * 360) + 90;
+
+        minHand.style.transform = `rotate(${miuntesToDegrees}deg)`;
+        minHand.style.transition =
+          minutes === 0
+            ? "none"
+            : "transform 0.05s cubic-bezier(0.1, 2.7, 0.58, 1)";
+
+        const hours = now.getHours();
+
+        // prettier-ignore
+        const hoursToDegrees = ((hours / 12) * 360) + 90;
+
+        hourHand.style.transform = `rotate(${hoursToDegrees}deg)`;
+        hourHand.style.transition =
+          hours === 0
+            ? "none"
+            : "transform 0.05s cubic-bezier(0.1, 2.7, 0.58, 1)";
+      }
+
+      setInterval(getDate, 1000);
+    </script>
   </body>
 </html>
