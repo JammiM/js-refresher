@@ -14,9 +14,9 @@
         id="spacing"
         type="range"
         name="spacing"
-        min="10"
+        min="0"
         max="200"
-        value="10"
+        value="0"
         data-sizing="px"
       />
 
@@ -27,7 +27,7 @@
         name="blur"
         min="0"
         max="25"
-        value="10"
+        value="0"
         data-sizing="px"
       />
 
@@ -56,42 +56,38 @@
       }
 
       :root {
-        --baseColour: #ffc600;
-        --spacingAmout: 0px;
-        --blurAmount: 0px;
+        --base: #ffc600;
+        --spacing: 0px;
+        --blur: 0px;
       }
 
       .hl {
-        color: var(--baseColour);
+        color: var(--base);
       }
 
       img {
-        padding: var(--spacingAmout);
-        background-color: var(--baseColour);
-        filter: blur(var(--blurAmount));
+        padding: var(--spacing);
+        background-color: var(--base);
+        filter: blur(var(--blur));
       }
     </style>
 
     <script>
-      const colourPicker = document.getElementById("base");
+      const inputs = document.querySelectorAll("input");
 
-      colourPicker.addEventListener("input", (e) => {
-        document.body.style.setProperty("--baseColour", e.target.value);
-      });
+      function handleInput(e) {
+        const suffix = this.dataset.sizing || "";
 
-      const paddingPicker = document.getElementById("spacing");
+        console.log(`--${this.name}`, `${this.value}${suffix}`);
 
-      paddingPicker.addEventListener("input", (e) => {
         document.body.style.setProperty(
-          "--spacingAmout",
-          `${e.target.value}px`
+          `--${this.name}`,
+          `${this.value}${suffix}`
         );
-      });
+      }
 
-      const blurPicker = document.getElementById("blur");
-
-      blurPicker.addEventListener("input", (e) => {
-        document.body.style.setProperty("--blurAmount", `${e.target.value}px`);
+      inputs.forEach((input) => {
+        input.addEventListener("input", handleInput);
       });
     </script>
   </body>
