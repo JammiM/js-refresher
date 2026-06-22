@@ -64,6 +64,12 @@
       .hl {
         color: var(--baseColour);
       }
+
+      img {
+        padding: var(--spacingAmout);
+        background-color: var(--baseColour);
+        filter: blur(var(--blurAmount));
+      }
     </style>
 
     <script>
@@ -71,6 +77,21 @@
 
       colourPicker.addEventListener("input", (e) => {
         document.body.style.setProperty("--baseColour", e.target.value);
+      });
+
+      const paddingPicker = document.getElementById("spacing");
+
+      paddingPicker.addEventListener("input", (e) => {
+        document.body.style.setProperty(
+          "--spacingAmout",
+          `${e.target.value}px`
+        );
+      });
+
+      const blurPicker = document.getElementById("blur");
+
+      blurPicker.addEventListener("input", (e) => {
+        document.body.style.setProperty("--blurAmount", `${e.target.value}px`);
       });
     </script>
   </body>
