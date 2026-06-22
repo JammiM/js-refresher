@@ -38,10 +38,6 @@
     <img src="https://placedog.net/500" />
 
     <style>
-      /*
-      misc styles, nothing to do with CSS variables
-    */
-
       body {
         text-align: center;
         background: #193549;
@@ -58,8 +54,24 @@
       input {
         width: 100px;
       }
+
+      :root {
+        --baseColour: #ffc600;
+        --spacingAmout: 0px;
+        --blurAmount: 0px;
+      }
+
+      .hl {
+        color: var(--baseColour);
+      }
     </style>
 
-    <script></script>
+    <script>
+      const colourPicker = document.getElementById("base");
+
+      colourPicker.addEventListener("input", (e) => {
+        document.body.style.setProperty("--baseColour", e.target.value);
+      });
+    </script>
   </body>
 </html>
